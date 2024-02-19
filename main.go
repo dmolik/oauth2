@@ -119,7 +119,9 @@ func (f *fetcher) getTokenEndpoint() string {
 func main() {
 
 	var cfg config
-	envconfig.Process("", &cfg)
+	if err := envconfig.Process("", &cfg); err != nil {
+		log.Fatal(err)
+	}
 	f := NewFetcher(cfg)
 
 	// now ready to use the new client
