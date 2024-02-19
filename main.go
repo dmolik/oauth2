@@ -4,7 +4,7 @@ import (
 	"context"
 	"crypto/tls"
 	"encoding/json"
-	"io/ioutil"
+	"io"
 	"log"
 	"net/http"
 	"strings"
@@ -85,7 +85,7 @@ func (f *fetcher) getJson(url string, target interface{}) error {
 		return err
 	}
 	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		return err
 	}
@@ -101,7 +101,7 @@ func (f *fetcher) getTokenEndpoint() string {
 		log.Fatal(err)
 	}
 	defer res.Body.Close()
-	body, err := ioutil.ReadAll(res.Body)
+	body, err := io.ReadAll(res.Body)
 	if err != nil {
 		log.Fatal(err)
 	}
